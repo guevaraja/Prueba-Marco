@@ -1,11 +1,13 @@
 package eva_andres.demo.repository
 
-import eva_andres.demo.model.asistente
+import eva_andres.demo.model.Asistente
+
+
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
+interface AsistenteRepository:JpaRepository<Asistente, Long> {
 
-
-interface asistenteRepository: JpaRepository <asistente, Long>{
+    fun findById(id: Long?):Asistente?
 }

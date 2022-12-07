@@ -19,10 +19,13 @@ class InvoiceService {
     fun list():List<Invoice>{
         return invoiceRepository.findAll()
     }
+    fun listTotalMoreThan(total:Double?): List<Invoice>? {
+        return invoiceRepository.findTotalMoreThan(total)
+    }
 
     fun save(invoice:Invoice):Invoice{
         try{
-            invoiceRepository.findById(invoice.asistenteId)
+            asistenteRepository.findById(invoice.asistenteId)
                 ?: throw Exception("asistente no existe")
             return invoiceRepository.save(invoice)
         }

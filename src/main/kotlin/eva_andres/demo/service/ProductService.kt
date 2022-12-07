@@ -2,47 +2,49 @@ package eva_andres.demo.service
 
 import eva_andres.demo.model.Asistente
 import eva_andres.demo.model.Invoice
+import eva_andres.demo.model.Product
 import eva_andres.demo.repository.AsistenteRepository
+import eva_andres.demo.repository.ProductRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 
 @Service
-class AsistenteService {
+class ProductService {
 
     @Autowired
-    lateinit var asistenteRepository: AsistenteRepository
+    lateinit var productRepository: ProductRepository
 
-    fun list():List<Asistente>{
-        return asistenteRepository.findAll()
+    fun list():List<Product>{
+        return productRepository.findAll()
     }
 
-    fun save(asistente:Asistente):Asistente{
-        return asistenteRepository.save(asistente)
+    fun save(product:Product):Product{
+        return productRepository.save(product)
 
     }
 
-    fun update(asistente: Asistente):Asistente{
+    fun update(product: Product):Product{
         try{
-            asistenteRepository.findById(asistente.id)
+            productRepository.findById(product.id)
                 ?: throw Exception("ID no existe")
-            return asistenteRepository.save(asistente)
+            return productRepository.save(product)
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
         }
     }
 
-    fun updateName(asistente:Asistente): Asistente{
+    fun updateStock(product:Product):Product{
         try{
-            val response = asistenteRepository.findById(asistente.id)
+            val response =  productRepository.findById(product.id)
                 ?: throw Exception("ID no existe")
             response.apply {
-                nombres=asistente.nombres
+                stock =product.stock
 
             }
-            return asistenteRepository.save(response)
+            return productRepository.save(response)
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)

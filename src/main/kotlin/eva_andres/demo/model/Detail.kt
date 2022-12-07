@@ -1,5 +1,6 @@
 package eva_andres.demo.model
 
+import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -9,17 +10,17 @@ import javax.persistence.Table
 import javax.validation.constraints.NotBlank
 
 @Entity
-@Table(name="Asistente")
-class Asistente {
+@Table(name="Detail")
+class Detail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(updatable = false)
     var id: Long? = null
-    @NotBlank
-    var nombres: String? = null
-    @NotBlank
-    var email: String? = null
-    var institucion: String? = null
-    var cargo: String? = null
+    @Column (name="invoice_id")
+    var invoiceId: Long? = null
+    @Column (name="product_id")
+    var productId: Long? = null
+    var quantity: Long? = null
+
 
 }

@@ -1,6 +1,6 @@
 
 
-CREATE TABLE IF NOT EXISTS invoice(
+CREATE TABLE IF NOT EXISTS Invoice(
     id SERIAL,
     asistente_id INT NOT NULL  ,
     code VARCHAR (50) NOT NULL,

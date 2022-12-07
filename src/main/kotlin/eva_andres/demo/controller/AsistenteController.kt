@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/asistente")
@@ -23,7 +24,7 @@ class AsistenteController {
     }
 
     @PostMapping
-    fun save(@RequestBody asistente: Asistente):Asistente{
+    fun save(@RequestBody @Valid asistente: Asistente):Asistente{
         return asistenteService.save(asistente)
     }
 

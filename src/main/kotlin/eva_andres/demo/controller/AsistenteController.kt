@@ -22,6 +22,16 @@ class AsistenteController {
     fun list():List<Asistente>{
         return asistenteService.list()
     }
+    @GetMapping("/{id}")
+    fun listById (@PathVariable ("id") id: Long):ResponseEntity<Asistente>{
+        return ResponseEntity(asistenteService.listById(id), HttpStatus.OK)
+    }
+
+
+    @DeleteMapping("/delete/{id}")
+    fun delete (@PathVariable("id") id: Long):Boolean?{
+        return asistenteService.delete(id)
+    }
 
     @PostMapping
     fun save(@RequestBody @Valid asistente: Asistente):Asistente{

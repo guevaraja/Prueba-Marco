@@ -18,6 +18,16 @@ class AsistenteService {
         return asistenteRepository.findAll()
     }
 
+    fun listById (id: Long?): Asistente{
+        return asistenteRepository.findById(id)
+    }
+    fun delete (id: Long?):Boolean?{
+        asistenteRepository.findById(id) ?:
+        throw  Exception()
+        asistenteRepository.deleteById(id!!)
+        return true
+    }
+
     fun save(asistente:Asistente):Asistente{
         return asistenteRepository.save(asistente)
 

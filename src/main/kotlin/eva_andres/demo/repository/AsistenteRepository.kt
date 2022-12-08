@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface AsistenteRepository:JpaRepository<Asistente, Long> {
 
-    fun findById(id: Long?):Asistente?
+    fun findById(id: Long?):Asistente
 }

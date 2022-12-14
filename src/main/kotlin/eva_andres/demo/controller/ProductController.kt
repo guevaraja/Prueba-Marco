@@ -4,9 +4,11 @@ package eva_andres.demo.controller
 import eva_andres.demo.model.Product
 import eva_andres.demo.service.ProductService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+
 
 @RestController
 @RequestMapping("/product")
@@ -16,8 +18,9 @@ class ProductController {
     lateinit var productService: ProductService
 
     @GetMapping
-    fun list():List<Product>{
-        return productService.list()
+    fun list (product:Product, pageable: Pageable):ResponseEntity<*>{
+        val response= productService.list(pageable ,product)
+        return ResponseEntity(response, HttpStatus.OK)
     }
 
     @PostMapping
@@ -34,5 +37,6 @@ class ProductController {
     fun updateStock (@RequestBody product:Product):ResponseEntity<Product>{
         return ResponseEntity(productService.updateStock(product), HttpStatus.OK)
     }
+
 
 }

@@ -1,8 +1,6 @@
 package eva_andres.demo.repository
 
-import eva_andres.demo.model.Asistente
 import eva_andres.demo.model.Invoice
-import eva_andres.demo.model.Product
 
 
 import org.springframework.data.jpa.repository.JpaRepository

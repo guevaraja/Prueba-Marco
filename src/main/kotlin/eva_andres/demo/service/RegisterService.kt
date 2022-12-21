@@ -1,8 +1,7 @@
 package eva_andres.demo.service
 
-import eva_andres.demo.model.Asistente
 import eva_andres.demo.model.Invoice
-import eva_andres.demo.repository.AsistenteRepository
+import eva_andres.demo.repository.MemberRepository
 import eva_andres.demo.repository.InvoiceRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -12,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException
 @Service
 class InvoiceService {
     @Autowired
-    lateinit var asistenteRepository: AsistenteRepository
+    lateinit var asistenteRepository: MemberRepository
     @Autowired
     lateinit var invoiceRepository: InvoiceRepository
 

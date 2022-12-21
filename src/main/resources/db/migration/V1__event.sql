@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS Asistente(
+CREATE TABLE IF NOT EXISTS (
     id SERIAL ,
     nombres VARCHAR(100) ,
     email VARCHAR (50) NOT NULL,

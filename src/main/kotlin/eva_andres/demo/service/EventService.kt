@@ -1,6 +1,8 @@
 package eva_andres.demo.service
 
+import eva_andres.demo.model.Event
 import eva_andres.demo.model.Member
+import eva_andres.demo.repository.EventRepository
 import eva_andres.demo.repository.MemberRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -8,50 +10,50 @@ import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 
 @Service
-class AsistenteService {
+class EventService {
 
     @Autowired
-    lateinit var asistenteRepository: MemberRepository
+    lateinit var eventRepository: EventRepository
 
-    fun list():List<Member>{
-        return asistenteRepository.findAll()
+    fun list():List<Event>{
+        return eventRepository.findAll()
     }
 
-    fun listById (id: Long?): Member{
-        return asistenteRepository.findById(id)
+    fun listById (id: Long?): Event{
+        return eventRepository.findById(id)
     }
     fun delete (id: Long?):Boolean?{
-        asistenteRepository.findById(id) ?:
+        eventRepository.findById(id) ?:
         throw  Exception()
-        asistenteRepository.deleteById(id!!)
+        eventRepository.deleteById(id!!)
         return true
     }
 
-    fun save(asistente:Member):Member{
-        return asistenteRepository.save(asistente)
+    fun save(event: Event):Event{
+        return eventRepository.save(event)
 
     }
 
-    fun update(asistente: Member):Member{
+    fun update(event: Event):Event{
         try{
-            asistenteRepository.findById(asistente.id)
+            eventRepository.findById(event.id)
                 ?: throw Exception("ID no existe")
-            return asistenteRepository.save(asistente)
+            return eventRepository.save(event)
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
         }
     }
 
-    fun updateName(asistente:Member): Member{
+    fun updateName(event:Event): Event{
         try{
-            val response = asistenteRepository.findById(asistente.id)
+            val response = eventRepository.findById(event.id)
                 ?: throw Exception("ID no existe")
             response.apply {
-                nombres=asistente.nombres
+                totalAttendees=event.totalAttendees
 
             }
-            return asistenteRepository.save(response)
+            return eventRepository.save(response)
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)

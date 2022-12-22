@@ -8,50 +8,50 @@ import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 
 @Service
-class AsistenteService {
+class MemberService {
 
     @Autowired
-    lateinit var asistenteRepository: MemberRepository
+    lateinit var memberRepository: MemberRepository
 
     fun list():List<Member>{
-        return asistenteRepository.findAll()
+        return memberRepository.findAll()
     }
 
     fun listById (id: Long?): Member{
-        return asistenteRepository.findById(id)
+        return memberRepository.findById(id)
     }
     fun delete (id: Long?):Boolean?{
-        asistenteRepository.findById(id) ?:
+        memberRepository.findById(id) ?:
         throw  Exception()
-        asistenteRepository.deleteById(id!!)
+        memberRepository.deleteById(id!!)
         return true
     }
 
-    fun save(asistente:Member):Member{
-        return asistenteRepository.save(asistente)
+    fun save(member:Member):Member{
+        return memberRepository.save(member)
 
     }
 
-    fun update(asistente: Member):Member{
+    fun update(member: Member):Member{
         try{
-            asistenteRepository.findById(asistente.id)
+            memberRepository.findById(member.id)
                 ?: throw Exception("ID no existe")
-            return asistenteRepository.save(asistente)
+            return memberRepository.save(member)
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
         }
     }
 
-    fun updateName(asistente:Member): Member{
+    fun updateName(member:Member): Member{
         try{
-            val response = asistenteRepository.findById(asistente.id)
+            val response = memberRepository.findById(member.id)
                 ?: throw Exception("ID no existe")
             response.apply {
-                nombres=asistente.nombres
+                fullname=member.fullname
 
             }
-            return asistenteRepository.save(response)
+            return memberRepository.save(response)
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)

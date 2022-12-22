@@ -1,8 +1,12 @@
-CREATE TABLE IF NOT EXISTS Product(
+CREATE TABLE IF NOT EXISTS Conference(
     id SERIAL ,
-    description VARCHAR(100) ,
-    brand VARCHAR (30) NOT NULL,
-    stock INT NOT NULL,
+    title VARCHAR(100) ,
+    speaker VARCHAR (30) NOT NULL,
+    hour INT NOT NULL,
+    day DATE ,
+    totalAttendees VARCHAR (20),
+    event_id INT NOT NULL,
+    FOREIGN KEY (EVENT_id) REFERENCES Event(id)
     PRIMARY KEY (id)
 
 );

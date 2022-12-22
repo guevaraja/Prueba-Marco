@@ -9,17 +9,20 @@ import javax.persistence.Table
 import javax.validation.constraints.NotBlank
 
 @Entity
-@Table(name="Asistente")
-class Asistente {
+@Table(name="Event")
+class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(updatable = false)
     var id: Long? = null
+
+    var description: String? = null
     @NotBlank
-    var nombres: String? = null
+    var startDate: String? = null
     @NotBlank
-    var email: String? = null
-    var institucion: String? = null
-    var cargo: String? = null
+    var endDate: String? = null
+    @NotBlank
+    var totalAttendees: String? = null
+    var city: String? = null
 
 }

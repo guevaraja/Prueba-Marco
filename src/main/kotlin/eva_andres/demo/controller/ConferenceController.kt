@@ -1,8 +1,8 @@
 package eva_andres.demo.controller
 
 
-import eva_andres.demo.model.Product
-import eva_andres.demo.service.ProductService
+import eva_andres.demo.model.Conference
+import eva_andres.demo.service.ConferenceService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
@@ -11,31 +11,31 @@ import org.springframework.web.bind.annotation.*
 
 
 @RestController
-@RequestMapping("/product")
-class ProductController {
+@RequestMapping("/conference")
+class ConferenceController {
 
     @Autowired
-    lateinit var productService: ProductService
+    lateinit var conferenceService: ConferenceService
 
     @GetMapping
-    fun list (product:Product, pageable: Pageable):ResponseEntity<*>{
-        val response= productService.list(pageable ,product)
+    fun list (conference:Conference, pageable: Pageable):ResponseEntity<*>{
+        val response= conferenceService.list(pageable ,conference)
         return ResponseEntity(response, HttpStatus.OK)
     }
 
     @PostMapping
-    fun save(@RequestBody product: Product):Product{
-        return productService.save(product)
+    fun save(@RequestBody conference: Conference):Conference{
+        return conferenceService.save(conference)
     }
 
     @PutMapping
-    fun update (@RequestBody product: Product): ResponseEntity<Product>{
-        return ResponseEntity(productService.update(product),HttpStatus.OK )
+    fun update (@RequestBody conference: Conference): ResponseEntity<Conference>{
+        return ResponseEntity(conferenceService.update(conference),HttpStatus.OK )
     }
 
     @PatchMapping
-    fun updateStock (@RequestBody product:Product):ResponseEntity<Product>{
-        return ResponseEntity(productService.updateStock(product), HttpStatus.OK)
+    fun updateStock (@RequestBody conference:Conference):ResponseEntity<Conference>{
+        return ResponseEntity(conferenceService.updateStock(conference), HttpStatus.OK)
     }
 
 

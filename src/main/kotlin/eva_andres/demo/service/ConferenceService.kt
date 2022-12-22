@@ -1,7 +1,7 @@
 package eva_andres.demo.service
 
-import eva_andres.demo.model.Product
-import eva_andres.demo.repository.ProductRepository
+import eva_andres.demo.model.Conference
+import eva_andres.demo.repository.ConferenceRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Example
 import org.springframework.data.domain.ExampleMatcher
@@ -12,42 +12,42 @@ import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 
 @Service
-class ProductService {
+class ConferenceService {
 
     @Autowired
-    lateinit var productRepository: ProductRepository
+    lateinit var conferenceRepository: ConferenceRepository
 
-    fun list (pageable: Pageable,product:Product):Page<Product>{
+    fun list (pageable: Pageable,product:Conference):Page<Conference>{
         val matcher = ExampleMatcher.matching()
             .withIgnoreNullValues()
             .withMatcher(("brand"), ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
-        return productRepository.findAll(Example.of(product, matcher), pageable)
+        return conferenceRepository.findAll(Example.of(product, matcher), pageable)
     }
-    fun save(product:Product):Product{
-        return productRepository.save(product)
+    fun save(conference:Conference):Conference{
+        return conferenceRepository.save(conference)
 
     }
 
-    fun update(product: Product):Product{
+    fun update(conference: Conference):Conference{
         try{
-            productRepository.findById(product.id)
+            conferenceRepository.findById(conference.id)
                 ?: throw Exception("ID no existe")
-            return productRepository.save(product)
+            return conferenceRepository.save(conference)
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
         }
     }
 
-    fun updateStock(product:Product):Product{
+    fun updateStock(conference:Conference):Conference{
         try{
-            val response =  productRepository.findById(product.id)
+            val response =  conferenceRepository.findById(conference.id)
                 ?: throw Exception("ID no existe")
             response.apply {
-                stock =product.stock
+                speaker =conference.speaker
 
             }
-            return productRepository.save(response)
+            return conferenceRepository.save(response)
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)

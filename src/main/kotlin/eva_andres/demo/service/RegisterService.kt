@@ -1,32 +1,32 @@
 package eva_andres.demo.service
 
-import eva_andres.demo.model.Invoice
+import eva_andres.demo.model.Register
 import eva_andres.demo.repository.MemberRepository
-import eva_andres.demo.repository.InvoiceRepository
+import eva_andres.demo.repository.RegisterRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 
 @Service
-class InvoiceService {
+class RegisterService {
     @Autowired
-    lateinit var asistenteRepository: MemberRepository
+    lateinit var registerepository: MemberRepository
     @Autowired
-    lateinit var invoiceRepository: InvoiceRepository
+    lateinit var registerRepository: RegisterRepository
 
-    fun list():List<Invoice>{
-        return invoiceRepository.findAll()
+    fun list():List<Register>{
+        return registerRepository.findAll()
     }
-    fun listTotalMoreThan(total:Double?): List<Invoice>? {
-        return invoiceRepository.findTotalMoreThan(total)
+    fun listTotalMoreThan(total:Double?): List<Register>? {
+        return registerRepository.findTotalMoreThan(total)
     }
 
-    fun save(invoice:Invoice):Invoice{
+    fun save(register:Register):Register{
         try{
-            asistenteRepository.findById(invoice.asistenteId)
+            registerRepository.findById(register.memberId)
                 ?: throw Exception("asistente no existe")
-            return invoiceRepository.save(invoice)
+            return registerRepository.save(register)
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
@@ -38,29 +38,38 @@ class InvoiceService {
 
 
 
-    fun update(invoice: Invoice):Invoice{
+    fun update(register: Register):Register{
         try{
-            invoiceRepository.findById(invoice.id)
+            registerRepository.findById(register.id)
                 ?: throw Exception("ID no existe")
-            return invoiceRepository.save(invoice)
+            return registerRepository.save(register)
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
         }
     }
 
-    fun updateTotal(invoice: Invoice): Invoice {
+    fun updateTotal(register: Register): Register {
         try{
-            val response = invoiceRepository.findById(invoice.id)
+            val response = registerRepository.findById(register.id)
                 ?: throw Exception("ID no existe")
             response.apply {
-                total=invoice.total
+                code=register.code
             }
-            return invoiceRepository.save(response)
+            return registerRepository.save(response)
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
         }
     }
+    fun calculateAndUpdateTotal (register: Register){
+        val totalCalculated = registerRepository.sumTotal(register.memberId)
+        val conferenceResponse = conferenceRepository.findById(register.memberId)
+        conferenceResponse.apply {
+            totalAttendees=totalCalculated
+        }
+        conferenceRepository.save(conferenceResponse)
+    }
+
 
 }

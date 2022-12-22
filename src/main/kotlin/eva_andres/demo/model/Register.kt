@@ -10,16 +10,18 @@ import javax.persistence.Table
 
 @Entity
 @Table(name="invoice")
-class Invoice {
+class Register {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(updatable = false)
     var id: Long? = null
-    @Column (name="asistente_id")
-    var asistenteId: Long? = null
+    @Column (name="member_id")
+    var memberId: Long? = null
+    @Column (name="conference_id")
+    var conferenceId: Long? = null
     var code: String? = null
-    @Column (name="create_at")
-    var createAt: Date? = null
-    var total: Double? = null
+    @Column (name="registered_at")
+    var registeredAt: Date? = null
+    var assisted: Boolean? = null
 
 }

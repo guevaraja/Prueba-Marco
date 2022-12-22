@@ -1,9 +1,8 @@
 package eva_andres.demo.controller
 
-import eva_andres.demo.model.Asistente
-import eva_andres.demo.model.Invoice
-import eva_andres.demo.service.AsistenteService
-import eva_andres.demo.service.InvoiceService
+import eva_andres.demo.model.Event
+import eva_andres.demo.service.EventService
+
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -12,40 +11,40 @@ import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/asistente")
-class MemberController {
+@RequestMapping("/event")
+class EventController {
 
     @Autowired
-    lateinit var asistenteService: AsistenteService
+    lateinit var eventService: EventService
 
     @GetMapping
-    fun list():List<Asistente>{
-        return asistenteService.list()
+    fun list():List<Event>{
+        return eventService.list()
     }
     @GetMapping("/{id}")
-    fun listById (@PathVariable ("id") id: Long):ResponseEntity<Asistente>{
-        return ResponseEntity(asistenteService.listById(id), HttpStatus.OK)
+    fun listById (@PathVariable ("id") id: Long):ResponseEntity<Event>{
+        return ResponseEntity(eventService.listById(id), HttpStatus.OK)
     }
 
 
     @DeleteMapping("/delete/{id}")
     fun delete (@PathVariable("id") id: Long):Boolean?{
-        return asistenteService.delete(id)
+        return eventService.delete(id)
     }
 
     @PostMapping
-    fun save(@RequestBody @Valid asistente: Asistente):Asistente{
-        return asistenteService.save(asistente)
+    fun save(@RequestBody @Valid event: Event):Event{
+        return eventService.save(event)
     }
 
     @PutMapping
-    fun update (@RequestBody asistente: Asistente): ResponseEntity<Asistente>{
-        return ResponseEntity(asistenteService.update(asistente),HttpStatus.OK )
+    fun update (@RequestBody event: Event): ResponseEntity<Event>{
+        return ResponseEntity(eventService.update(event),HttpStatus.OK )
     }
 
     @PatchMapping
-    fun updateName (@RequestBody asistente:Asistente):ResponseEntity<Asistente>{
-        return ResponseEntity(asistenteService.updateName(asistente), HttpStatus.OK)
+    fun updateName (@RequestBody event:Event):ResponseEntity<Event>{
+        return ResponseEntity(eventService.updateName(event), HttpStatus.OK)
     }
 
 }

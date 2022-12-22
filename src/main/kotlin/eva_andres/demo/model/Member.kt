@@ -10,16 +10,14 @@ import javax.validation.constraints.NotBlank
 
 @Entity
 @Table(name="Asistente")
-class Asistente {
+class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(updatable = false)
     var id: Long? = null
-    @NotBlank
-    var nombres: String? = null
-    @NotBlank
+    var fullname: String? = null
     var email: String? = null
-    var institucion: String? = null
-    var cargo: String? = null
+    var age: String? = null
+
 
 }

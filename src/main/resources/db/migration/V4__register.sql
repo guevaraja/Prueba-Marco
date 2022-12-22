@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS Register(
     conference_id INT NOT NULL  ,
     code VARCHAR (5) NOT NULL,
     registered_at DATE  NOT NULL ,
-    assisted INT NOT NULL
+    assisted BOOLEAN
     PRIMARY KEY (id),
     UNIQUE (code),
     FOREIGN KEY (member_id) REFERENCES Member(id)

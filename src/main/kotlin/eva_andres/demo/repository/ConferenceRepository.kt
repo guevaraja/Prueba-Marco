@@ -1,6 +1,5 @@
 package eva_andres.demo.repository
 
-import eva_andres.demo.model.Asistente
 import eva_andres.demo.model.Product
 
 

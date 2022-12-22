@@ -1,9 +1,6 @@
 package eva_andres.demo.service
 
-import eva_andres.demo.model.Asistente
-import eva_andres.demo.model.Invoice
 import eva_andres.demo.model.Product
-import eva_andres.demo.repository.AsistenteRepository
 import eva_andres.demo.repository.ProductRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Example
